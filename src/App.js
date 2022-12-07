@@ -3,43 +3,49 @@ import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
+import {useState} from "react";
 
 
 function App() {
-    const appTitle = 'To Do';
-    let toDoList =[];
+    const appTitle = 'todos';
+    const placeHolder = 'What needs to be done?';
+    const [ toDoList, setToDoList ] = useState([]);
+
+
 
     const addToDo =(taskName)=>{
-        toDoList.concat(toDoList, [{id: Date.now(), task: taskName, completed: false}]);
+        setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false}]));
+        console.log(toDoList)
+
     }
 
     const removeTodo = (toDoToRemove) => {
-        toDoList = toDoList.filter(todo => todo.id !==toDoToRemove.id);
+        setToDoList (toDoList.filter(todo => todo.id !==toDoToRemove.id));
 
     }
 
     const toggleCompletedTask = (taskToToggleCompleted) =>{
-        toDoList.forEach(function (todo){
+         (toDoList.forEach(function (todo){
             if (todo.id ===taskToToggleCompleted.id){
                 (todo.completed ===true) ? todo.completed=false : todo.completed =true;
             }
-        })
+        }))
     }
 
     const toggleCompletedAll = (checkBoxStatus) =>{
-        toDoList = toDoList.map( todo => ({ ...todo, completed: checkBoxStatus }));
+        setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus })));
     }
 
     const clearAllCompleted = ()=>{
-        toDoList = toDoList.filter(todo => !todo.completed)
+        setToDoList (toDoList.filter(todo => !todo.completed));
     }
 
 
   return (
   <section className="todoapp">
-      <Header />
-      <Main />
-      <Footer />
+      <Header title ={appTitle} placeholder={placeHolder} funcForAddingATask = {addToDo}/>
+      <Main removeTodoFunc={removeTodo} toDoList = {toDoList} toggleCompletedAll={toggleCompletedAll} />
+      <Footer clearAllCompleted={clearAllCompleted} />
   </section>
 
 
