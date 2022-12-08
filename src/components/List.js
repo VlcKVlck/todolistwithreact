@@ -1,18 +1,24 @@
+import {useState} from "react";
 
 export default function List (props){
-    function handleClick (e){
-        props.removeTodoFunc (e.target.value);
+    // const [ toDoList, setToDoList ] = useState(false);
+    function handleDeletion (e){
+        props.removeTodoFunc (e.target.id);
+    }
+
+    function HandleComplete (e){
+        props.toggleCompletedTask (e.target.id);
     }
 
     return (
         <ul className="todo-list">
             {props.toDoList.map(todo => (
-                 <li id={todo.id}>
+                 <li key={todo.id}>
                     <div className="view">
                         <input className="toggle"
-                               type="checkbox"/>
+                               id={todo.id} type="checkbox" onChange={HandleComplete}/>
                         <label>{todo.task}</label>
-                        <button className="destroy" onClick={handleClick}/>
+                        <button className="destroy" id={todo.id} onClick={handleDeletion}/>
                     </div>
                     <input className="edit"/>
                 </li>

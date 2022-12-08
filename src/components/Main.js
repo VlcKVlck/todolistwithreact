@@ -3,7 +3,7 @@ import List from './List'
 
 
 export default function Main (props){
-    function HandleChangeEvent(e){
+    function HandleToggleCompletedAll(e){
         props.toggleCompletedAll (e.target.checked);
     }
 
@@ -11,8 +11,8 @@ export default function Main (props){
         <section className="main">
             <input className="toggle-all"
                    type="checkbox"
-            onChange={HandleChangeEvent}/>
-            <List removeTodoFunc={props.removeTodoFunc} toDoList={props.toDoList}/>
+            onChange={HandleToggleCompletedAll}/>
+            <List removeTodoFunc={props.removeTodoFunc} toDoList={props.toDoList} toggleCompletedTask={props.toggleCompletedTask}/>
         </section>
 
     )
