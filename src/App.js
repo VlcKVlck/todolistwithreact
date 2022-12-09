@@ -11,10 +11,8 @@ function App() {
     const placeHolder = 'What needs to be done?';
     const [ toDoList, setToDoList ] = useState([]);
     const [ noneCompletedItemsCount, setNoneCompletedItemsCount ] = useState(0);
-    const [ completedStyle, setCompletedStyle ] = useState(false);
-    let ClassNameOfCompletedTask = 'app';
+    console.log('entered app', "todolist;", toDoList)
 
-    console.log('entered app')
 
     useEffect(() => {
       const uncompleted = toDoList.filter( todo => todo.completed==false );
@@ -26,7 +24,7 @@ function App() {
         if (!taskName) return;
         setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false, completedStyle:""}]));
         console.log('added task')
-        console.log(toDoList)
+        // console.log(toDoList, "after adding")
     }
 
     const removeTodo = (toDoToRemoveID) => {
@@ -47,8 +45,8 @@ function App() {
                 todo.completedStyle = "completed";
             }
         }})
-        console.log(newlist, "new list")
-        setToDoList(newlist)
+        console.log(newlist, "new list");
+        setToDoList(newlist);
 }
 
 
@@ -62,8 +60,6 @@ function App() {
     }
 
 
-
-
   return (
   <section className="todoapp">
       <Header title ={appTitle} placeholder={placeHolder} addToDo = {addToDo}/>
@@ -72,8 +68,6 @@ function App() {
       {/*</Main>*/}
       <Footer clearAllCompleted={clearAllCompleted} openTasks={noneCompletedItemsCount} />
   </section>
-
-
   );
 }
 

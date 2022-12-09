@@ -1,8 +1,8 @@
 import List from './List'
 
 
-
 export default function Main (props){
+    console.log("entered main")
     function HandleToggleCompletedAll(e){
         props.toggleCompletedAll (e.target.checked);
     }
