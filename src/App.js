@@ -22,7 +22,7 @@ function App() {
 
     const addToDo =(taskName)=>{
         if (!taskName) return;
-        setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false, completedStyle:""}]));
+        setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false}]));
         console.log('added task')
         // console.log(toDoList, "after adding")
     }
@@ -43,7 +43,7 @@ function App() {
 
 
     const toggleCompletedAll = (checkBoxStatus) =>{
-        setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus, completedStyle: (checkBoxStatus ===true) ? "completed" : "" })));
+        setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus})));
     }
 
     const clearAllCompleted = ()=>{
