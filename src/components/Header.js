@@ -7,7 +7,6 @@ export default function Header(props){
             console.log(e.target.value);
             e.target.value ='';
         }
-        else{console.log ("other key")}
     }
     return (
         <header className="header">

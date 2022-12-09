@@ -17,7 +17,7 @@ function App() {
     useEffect(() => {
       const uncompleted = toDoList.filter( todo => todo.completed==false );
       setNoneCompletedItemsCount(uncompleted.length);
-      console.log(uncompleted)
+      console.log(uncompleted, 'uncompleted')
   }, [toDoList])
 
     const addToDo =(taskName)=>{
@@ -33,39 +33,34 @@ function App() {
     }
 
     const toggleCompletedTask = (taskId) =>{
-        let newlist = toDoList;
-       newlist.forEach(todo=>{
+        toDoList.forEach(todo=>{
           if (todo.id ==taskId) {
             console.log('vicky2', toDoList);
-            if (todo.completed === true) {
-                todo.completed = false;
-                todo.completedStyle = "";
-            } else {
-                todo.completed = true;
-                todo.completedStyle = "completed";
-            }
+            todo.completed = todo.completed !== true;
         }})
-        console.log(newlist, "new list");
-        setToDoList(newlist);
+        setToDoList(toDoList.slice());
 }
 
 
     const toggleCompletedAll = (checkBoxStatus) =>{
         setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus, completedStyle: (checkBoxStatus ===true) ? "completed" : "" })));
-        // console.log('vicky2', toDoList);
     }
 
     const clearAllCompleted = ()=>{
         setToDoList (toDoList.filter(todo => !todo.completed));
     }
 
+    const changeTaskFromListOnDoubleClick =(e)=>{
+
+    }
+
 
   return (
   <section className="todoapp">
       <Header title ={appTitle} placeholder={placeHolder} addToDo = {addToDo}/>
-      <Main toDoList = {toDoList} toggleCompletedAll={toggleCompletedAll} removeTodo={removeTodo} toggleCompletedTask={toggleCompletedTask}/>
-        {/*<List removeTodoFunc={removeTodo} toggleCompletedTask={toggleCompletedTask} toDoList = {toDoList} />*/}
-      {/*</Main>*/}
+      <Main toDoList = {toDoList} toggleCompletedAll={toggleCompletedAll} removeTodo={removeTodo} toggleCompletedTask={toggleCompletedTask}>
+        <List removeTodoFunc={removeTodo} toggleCompletedTask={toggleCompletedTask} changeTaskFromListOnDoubleClick={changeTaskFromListOnDoubleClick} toDoList = {toDoList} />
+      </Main>
       <Footer clearAllCompleted={clearAllCompleted} openTasks={noneCompletedItemsCount} />
   </section>
   );

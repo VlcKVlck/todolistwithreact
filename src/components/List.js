@@ -7,17 +7,23 @@ export default function List (props){
 
     function HandleComplete (e){
         props.toggleCompletedTask (e.target.id);
+        // (e.target.checked) ? e.target.checked=false : e.target.checked=true;
+    }
+
+    function handleDoubleClick (e){
+        // e.target.classList+='editing';
+        console.log(e);
     }
 
     return (
         <ul className="todo-list">
             {props.toDoList.map(todo => (
-                 <li key={todo.id} className={todo.completedStyle}>
+                 <li key={todo.id} className={(todo.completed==true)? "completed" : ''} onDoubleClick={handleDoubleClick}>
                     <div className="view">
                         <input className="toggle"
-                               id={todo.id} type="checkbox" onChange={HandleComplete}/>
-                        <label>{todo.task}</label>
-                        <button className="destroy" id={todo.id} onClick={handleDeletion}/>
+                               id={todo.id} type="checkbox" onChange={HandleComplete} checked={(todo.completed==true)? true : false}/>
+                        <label onDoubleClick={handleDoubleClick}>{todo.task}</label>
+                        <button className="destroy" id={todo.id} onClick={handleDeletion} onDoubleClick={handleDoubleClick}/>
                     </div>
                     <input className="edit"/>
                 </li>
