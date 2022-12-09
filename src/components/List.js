@@ -1,7 +1,6 @@
-import {useState} from "react";
 
 export default function List (props){
-    // const [ toDoList, setToDoList ] = useState(false);
+    console.log('enteredlists')
     function handleDeletion (e){
         props.removeTodoFunc (e.target.id);
     }
@@ -13,7 +12,7 @@ export default function List (props){
     return (
         <ul className="todo-list">
             {props.toDoList.map(todo => (
-                 <li key={todo.id}>
+                 <li key={todo.id} className={todo.completedStyle}>
                     <div className="view">
                         <input className="toggle"
                                id={todo.id} type="checkbox" onChange={HandleComplete}/>

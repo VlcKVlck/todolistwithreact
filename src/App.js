@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
+import List from './components/List'
 import {useEffect, useState} from "react";
 
 
@@ -11,7 +11,10 @@ function App() {
     const placeHolder = 'What needs to be done?';
     const [ toDoList, setToDoList ] = useState([]);
     const [ noneCompletedItemsCount, setNoneCompletedItemsCount ] = useState(0);
-    console.log('vick')
+    const [ completedStyle, setCompletedStyle ] = useState(false);
+    let ClassNameOfCompletedTask = 'app';
+
+    console.log('entered app')
 
     useEffect(() => {
       const uncompleted = toDoList.filter( todo => todo.completed==false );
@@ -21,25 +24,37 @@ function App() {
 
     const addToDo =(taskName)=>{
         if (!taskName) return;
-        setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false}]));
+        setToDoList (toDoList.concat( [{id: Date.now(), task: taskName, completed: false, completedStyle:""}]));
+        console.log('added task')
+        console.log(toDoList)
     }
 
     const removeTodo = (toDoToRemoveID) => {
-        console.log(toDoToRemoveID)
+        // console.log(toDoToRemoveID)
         setToDoList (toDoList.filter(todo => todo.id !=toDoToRemoveID));
     }
 
     const toggleCompletedTask = (taskId) =>{
-        toDoList.forEach(todo => {
-            if (todo.id ==taskId) {
-                (todo.completed === true) ? todo.completed = false : todo.completed = true;
+        let newlist = toDoList;
+       newlist.forEach(todo=>{
+          if (todo.id ==taskId) {
+            console.log('vicky2', toDoList);
+            if (todo.completed === true) {
+                todo.completed = false;
+                todo.completedStyle = "";
+            } else {
+                todo.completed = true;
+                todo.completedStyle = "completed";
+            }
+        }})
+        console.log(newlist, "new list")
+        setToDoList(newlist)
+}
 
-            }})
-        setToDoList(toDoList);
-    }
 
     const toggleCompletedAll = (checkBoxStatus) =>{
-        setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus })));
+        setToDoList (toDoList.map( todo => ({ ...todo, completed: checkBoxStatus, completedStyle: (checkBoxStatus ===true) ? "completed" : "" })));
+        // console.log('vicky2', toDoList);
     }
 
     const clearAllCompleted = ()=>{
@@ -51,8 +66,10 @@ function App() {
 
   return (
   <section className="todoapp">
-      <Header title ={appTitle} placeholder={placeHolder} funcForAddingATask = {addToDo}/>
-      <Main toggleCompletedTask={toggleCompletedTask} removeTodoFunc={removeTodo} toDoList = {toDoList} toggleCompletedAll={toggleCompletedAll} />
+      <Header title ={appTitle} placeholder={placeHolder} addToDo = {addToDo}/>
+      <Main toDoList = {toDoList} toggleCompletedAll={toggleCompletedAll} removeTodo={removeTodo} toggleCompletedTask={toggleCompletedTask}/>
+        {/*<List removeTodoFunc={removeTodo} toggleCompletedTask={toggleCompletedTask} toDoList = {toDoList} />*/}
+      {/*</Main>*/}
       <Footer clearAllCompleted={clearAllCompleted} openTasks={noneCompletedItemsCount} />
   </section>
 

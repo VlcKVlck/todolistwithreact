@@ -12,7 +12,8 @@ export default function Main (props){
             <input className="toggle-all"
                    type="checkbox"
             onChange={HandleToggleCompletedAll}/>
-            <List removeTodoFunc={props.removeTodoFunc} toDoList={props.toDoList} toggleCompletedTask={props.toggleCompletedTask}/>
+            {/*{props.children}*/}
+            <List toDoList = {props.toDoList} removeTodoFunc={props.removeTodo} toggleCompletedTask={props.toggleCompletedTask}/>
         </section>
 
     )

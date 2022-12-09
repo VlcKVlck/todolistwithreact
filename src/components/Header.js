@@ -2,7 +2,7 @@
 export default function Header(props){
     function handleClick (e){
         if (e.key === 'Enter'){
-            props.funcForAddingATask (e.target.value);
+            props.addToDo (e.target.value);
             console.log(e.target.value);
             e.target.value ='';
 
