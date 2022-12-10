@@ -26,14 +26,13 @@ function App() {
     }
 
     const removeTodo = (toDoToRemoveID) => {
-        setToDoList (toDoList.filter(todo => todo.id !==toDoToRemoveID));
+        setToDoList (toDoList.filter(todo => todo.id !=toDoToRemoveID));
     }
 
     const toggleCompletedTask = (taskId) =>{
         toDoList.forEach(todo=>{
-          if (todo.id ===taskId) {
-            console.log('vicky2', toDoList);
-            todo.completed = todo.completed !== true;
+          if (todo.id ==taskId) {
+            todo.completed = todo.completed != true;
         }})
         setToDoList(toDoList.slice());
 }
