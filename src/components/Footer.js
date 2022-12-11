@@ -1,9 +1,12 @@
+import {useContext} from "react";
+import {ListContext} from "../providers/list-context";
 
-export default function Footer (props){
+export default function Footer (){
+    const { noneCompletedItemsCount, clearAllCompleted } = useContext(ListContext);
     return (
         <footer className="footer">
-            <span className="todo-count"><strong>{props.openTasks}</strong> items left</span>
-            <button className="clear-completed" onClick={props.clearAllCompleted}>Clear completed
+            <span className="todo-count"><strong>{noneCompletedItemsCount}</strong> items left</span>
+            <button className="clear-completed" onClick={clearAllCompleted}>Clear completed
             </button>
         </footer>
     )

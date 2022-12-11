@@ -1,9 +1,12 @@
 import List from './List'
+import {useContext} from "react";
+import {ListContext} from "../providers/list-context";
 
 
-export default function Main (props){
+export default function Main ({children}){
+    const { toggleCompletedAll} = useContext(ListContext);
     function HandleToggleCompletedAll(e){
-        props.toggleCompletedAll (e.target.checked);
+        toggleCompletedAll (e.target.checked);
     }
 
     return (
@@ -11,7 +14,7 @@ export default function Main (props){
             <input className="toggle-all"
                    type="checkbox"
             onChange={HandleToggleCompletedAll}/>
-            {props.children}
+            {children}
         </section>
 
     )

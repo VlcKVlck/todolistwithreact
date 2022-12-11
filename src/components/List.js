@@ -1,23 +1,26 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {ListContext} from "../providers/list-context";
 
-export default function List (props){
+export default function List (){
+    const { toggleCompletedTask , removeTodoFunc , toDoList, editToDo} = useContext(ListContext);
+
     const [editFlag, setEditFlag] = useState(false)
 
     function handleDeletion (e){
-        props.removeTodoFunc (e.target.id);
+        removeTodoFunc (e.target.id);
     }
     function handleDoubleClick (){
         setEditFlag(!editFlag)
     }
 
     function HandleComplete (e){
-        props.toggleCompletedTask (e.target.id);
+        toggleCompletedTask (e.target.id);
     }
 
 
     return (
         <ul className="todo-list" >
-            {props.toDoList.map(todo => (
+            {toDoList.map(todo => (
                  <li key={todo.id}  className= {(todo.completed ? "completed" : '') + (editFlag ? 'editing' : '')}>
                     <div className="view" >
                         <input className="toggle"
@@ -27,9 +30,10 @@ export default function List (props){
                     </div>
                     <input className="edit"
                         value = {todo.task}
-                        onChange={(e) => props.editToDo (todo,e.target.value)}
+                        onChange={(e) => editToDo (todo,e.target.value)}
                         onKeyUp={(e)=>e.key==='Enter' && handleDoubleClick()}/>
                 </li>
+
             ))}
         </ul>
     )
