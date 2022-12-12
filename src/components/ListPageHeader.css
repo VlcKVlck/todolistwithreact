@@ -1,0 +1,31 @@
+
+h1{
+    display: block;
+    width: 100vw;
+    font-size: 100px;
+    font-weight: 2000;
+    color: rgba(175, 47, 47, 0.15);
+
+}
+.inputform{
+    display: flex;
+    flex-direction: column;
+    left:0;
+    align-content: center;
+}
+#submitnewname {
+    width: 30%;
+    align-items: center;
+    border: 2px solid black;
+    font-size: 1em;
+}
+#submitnewname:hover{
+    background-color: #737373;
+    color: white;
+    }
+#submitnewname:active{
+    box-shadow: 0 1px #666;
+    transform: translateY(1px);
+    cursor: pointer;
+    }
+

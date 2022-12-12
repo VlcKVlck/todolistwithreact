@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {ListContext} from "../providers/list-context";
 
-export default function Footer (){
+export default function ListFooter (){
     const { noneCompletedItemsCount, clearAllCompleted } = useContext(ListContext);
     return (
         <footer className="footer">

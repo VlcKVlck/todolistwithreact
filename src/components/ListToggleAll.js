@@ -3,7 +3,7 @@ import {useContext} from "react";
 import {ListContext} from "../providers/list-context";
 
 
-export default function Main ({children}){
+export default function ListToggleAll ({children}){
     const { toggleCompletedAll} = useContext(ListContext);
     function HandleToggleCompletedAll(e){
         toggleCompletedAll (e.target.checked);

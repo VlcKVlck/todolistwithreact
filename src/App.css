@@ -4,17 +4,6 @@ body {
     padding: 0;
 }
 
-#submitnewname {
-    border: 2px solid;
-}
-#submitnewname:hover{
-        background-color: red;
-    }
-#submitnewname:active{
-    box-shadow: 0 1px #666;
-    transform: translateY(1px);
-    cursor: pointer;
-    }
 
 button {
     margin: 0;

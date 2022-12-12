@@ -1,25 +1,24 @@
 import './App.css';
 
-import ToDoList from './components/ToDoList'
-import {useRef, useState} from "react";
+import {NavBar} from "./pages/NavBar";
+import {Outlet} from "react-router-dom";
+import {useState} from "react";
+import {AuthContext} from "./providers/auth-context";
+
 
 
 function App() {
-    const [namesOfApps, setNamesOfApps] = useState([{id: Date (), name: 'todos'}])
-    const inputRef = useRef(null);
-
-    function handleTaskInput(event) {
-        setNamesOfApps (namesOfApps.concat ([{id: Date(), name: inputRef.current.value}]))
-        inputRef.current.value =''
-    }
+    const [currentUser,setCurrentUser ] = useState(null)
+    const userObject = {currentUser,setCurrentUser}
 
     return(
         <>
-            <input type='text' ref={inputRef} onKeyUp={(event) => event.key==='Enter' && handleTaskInput(event)}/>
-            <button type="submit" id='submitnewname' onClick={handleTaskInput}>Add name</button>
-            {namesOfApps.map(item => <ToDoList appName={item.name} />)}
+        <AuthContext.Provider value={userObject}>
+            <NavBar/>
+            <Outlet/>
+        </AuthContext.Provider>
         </>
-        )
+    )
 }
 
 export default App;

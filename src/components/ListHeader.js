@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {ListContext} from "../providers/list-context";
 
-export default function Header({appName}){
+export default function ListHeader({appName}){
     const { placeholder, addToDo } = useContext(ListContext);
     function handleClick (e){
         if (e.key === "Enter"){
